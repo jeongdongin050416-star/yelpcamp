@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <script crossorigin="anonymous" src='https://api.mapbox.com/mapbox-gl-js/v3.18.1/mapbox-gl.js'></script>
+    <link crossorigin="anonymous" href='https://api.mapbox.com/mapbox-gl-js/v3.18.1/mapbox-gl.css' rel='stylesheet' />
+    <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
+    <link rel="stylesheet" href="/stylesheets/app.css">
+    <title>YelpCamp</title>
+</head>
+
+<body class="d-flex flex-column vh-100">
+    <%- include('../partials/navbar', { currentUser }) %>
+        <main class="container mt-5">
+            <%- include('../partials/flash', { success, error }) %>
+                <%- body%>
+        </main>
+        <%- include('../partials/footer') %>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+                crossorigin="anonymous"></script>
+
+            <script src="/javascripts/validateForms.js"></script>
+            <script>
+                const fileInput = document.getElementById('image');
+                const fileNames = document.getElementById('fileNames');
+
+                fileInput.addEventListener('change', () => {
+                    if (fileInput.files.length === 0) {
+                        fileNames.textContent = '';
+                        return;
+                    }
+
+                    const names = Array.from(fileInput.files)
+                        .map(file => file.name)
+                        .join(', ');
+
+                    fileNames.textContent = `선택된 파일: ${names}`;
+                });
+            </script>
+</body>
+
+</html>
